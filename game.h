@@ -82,7 +82,9 @@ char play_move(char *movefilename) {
     fprintf(logfile, "Move %d: %d\n", ++moves, move);
     if (move < 1 || move > N) return 1;
     int row = 0;
-    while (board[row][move] == '.' && row+1 < N) row++;
+    while (board[row][move] == '.' && row+1 <= N) row++;
+    row--;
+    if (row == -1) return 1;
     if (moves%2) {
         board[row][move] = '1';
     } else {
