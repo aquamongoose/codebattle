@@ -32,7 +32,7 @@ void encode_state() {
     state[cur] = '\0';
 }
 
-void init_game(char *player1, char *player2) {
+void init_game() {
     char *fname = (char *)malloc(MAX_FILE_SIZE);
     moves = 0;
     state = (char *)malloc(MAX_STATE_SIZE);

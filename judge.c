@@ -4,7 +4,7 @@
 #include "game.h"
 
 void play_game(char *player1, char *player2) {
-    init_game(player1, player2);
+    init_game();
     while (!winner()) {
         FILE *infile = fopen("in.txt", "w");
         char *cmd = (char *)malloc(MAX_CMD_SIZE);
@@ -55,9 +55,8 @@ void play_game(char *player1, char *player2) {
 
 int main(int argc, char **argv) {
     if (argc != 3) {
-        printf("You must call %s with exactly two arguments, the names of the "
-                "two executables that should play eachother.\n Also, they "
-                " should be in the same directory as this executable.\n", argv[0]);
+        printf("You must call %s with exactly two arguments, the paths to the "
+                "two executables that should play eachother.\n", argv[0]);
         return 1;
     }
     play_game(argv[1], argv[2]);
