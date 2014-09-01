@@ -23,6 +23,11 @@ void play_game(char *program) {
             }
             printf("\n\n");
         }
+        for (int i=0; i<N; i++) {
+            printf("%d ", i+1);
+            if (i < 9) printf(" ");
+        }
+        printf("\n\n");
         scanf("%d", &dmove);
         fprintf(dfile, "%d\n", dmove);
         fclose(dfile);
