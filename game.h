@@ -5,6 +5,7 @@
 #define GAME_H
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 
 #define MAX_STATE_SIZE 4000
 #define MAX_CMD_SIZE 200
@@ -53,6 +54,15 @@ void finalize_game() {
 }
 
 char winner() {
+    char tie = 1;
+    for (int i=0; i<N; i++) {
+        if (board[i][0] == '.') {
+            tie = 0;
+        }
+    }
+    if (tie) {
+        return 'T';
+    }
     for (int i=0; i<N; i++) {
         for (int j=0; j<N; j++) {
             if (i+4 <= N) {
@@ -81,6 +91,7 @@ char winner() {
             }
         }
     }
+    return 0;
 }
 
 char play_move(char *movefilename) {

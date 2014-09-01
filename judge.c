@@ -41,7 +41,11 @@ void play_game(char *player1, char *player2) {
         }
         free(cmd);
     }
-    printf("The winner is %s!\n", winner() == '1' ? player1 : player2);
+    if (winner() == 'T') {
+        printf("The winner is... nobody. The game was a tie. Everyone loses.\n");
+    } else {
+        printf("The winner is %s!\n", winner() == '1' ? player1 : player2);
+    }
     finalize_game();
 }
 
