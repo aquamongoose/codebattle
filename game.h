@@ -36,7 +36,7 @@ void init_game(char *player1, char *player2) {
     char *fname = (char *)malloc(MAX_FILE_SIZE);
     moves = 0;
     state = (char *)malloc(MAX_STATE_SIZE);
-    sprintf(fname, "log_%s_%s.txt", player1, player2);
+    sprintf(fname, "log.txt");
     logfile = fopen(fname, "w");
     free(fname);
     N = rand()%(MAX_BOARD_SIZE-MIN_BOARD_SIZE + 1) + MIN_BOARD_SIZE;
@@ -65,6 +65,8 @@ char winner() {
     }
     for (int i=0; i<N; i++) {
         for (int j=0; j<N; j++) {
+            if (board[i][j] == '.') continue;
+
             if (i+4 <= N) {
                 if (board[i][j] == board[i+1][j] &&
                     board[i][j] == board[i+2][j] &&
@@ -100,10 +102,12 @@ char play_move(char *movefilename) {
     fscanf(movefile, "%d", &move);
     fprintf(logfile, "Move %d: %d\n", ++moves, move);
     if (move < 1 || move > N) return 1;
+    move--;
     int row = 0;
     while (board[row][move] == '.' && row+1 <= N) row++;
     row--;
     if (row == -1) return 1;
+
     if (moves%2) {
         board[row][move] = '1';
     } else {

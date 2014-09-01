@@ -8,6 +8,7 @@ void play_game(char *player1, char *player2) {
     while (!winner()) {
         FILE *infile = fopen("in.txt", "w");
         char *cmd = (char *)malloc(MAX_CMD_SIZE);
+        fprintf(infile, "1\n");
         fprintf(infile, "%s\n", state);
         fclose(infile);
         sprintf(cmd, "%s < in.txt > out.txt", player1);
@@ -22,8 +23,10 @@ void play_game(char *player1, char *player2) {
         if (play_move("out.txt")) {
             printf("%s played an illegal move, so %s wins by default.\n",
                     player1, player2);
+            return;
         }
         infile = fopen("in.txt", "w");
+        fprintf(infile, "2\n");
         fprintf(infile, "%s\n", state);
         fclose(infile);
         sprintf(cmd, "%s < in.txt > out.txt", player2);
@@ -38,6 +41,7 @@ void play_game(char *player1, char *player2) {
         if (play_move("out.txt")) {
             printf("%s played an illegal move, so %s wins by default.\n",
                     player2, player1);
+            return;
         }
         free(cmd);
     }
