@@ -9,8 +9,8 @@
 #define MAX_STATE_SIZE 4000
 #define MAX_CMD_SIZE 200
 #define MAX_FILE_SIZE 100
-#define MAX_BOARD_SIZE 50
-#define MIN_BOARD_SIZE 5
+#define MAX_BOARD_SIZE 20
+#define MIN_BOARD_SIZE 10
 
 // The board will be N x N.
 int N;
@@ -21,12 +21,14 @@ FILE *logfile;
 char *state;
 
 void encode_state() {
-    int cur = 0;
+    sprintf(state, "%d\n", N);
+    int cur = strlen(state);
     for (int i=0; i<N; i++) {
         for (int j=0; j<N; j++)
             state[cur++] = board[i][j];
         state[cur++] = '\n';
     }
+    state[cur] = '\0';
 }
 
 void init_game(char *player1, char *player2) {
@@ -69,6 +71,12 @@ char winner() {
                 if (board[i][j] == board[i+1][j+1] &&
                     board[i][j] == board[i+2][j+2] &&
                     board[i][j] == board[i+3][j+3])
+                    return board[i][j];
+            }
+            if (i+4 <= N && j >= 3) {
+                if (board[i][j] == board[i+1][j-1] &&
+                    board[i][j] == board[i+2][j-2] &&
+                    board[i][j] == board[i+3][j-3])
                     return board[i][j];
             }
         }

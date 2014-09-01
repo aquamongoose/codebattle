@@ -12,7 +12,7 @@ void play_game(char *player1, char *player2) {
         fclose(infile);
         sprintf(cmd, "%s < in.txt > out.txt", player1);
         system(cmd);
-        sleep(2);
+        sleep(1);
         sprintf(cmd, "pkill %s", player1);
         if (system(cmd) == 0) {
             printf("%s took too much time, so %s wins by default.\n",
@@ -28,7 +28,7 @@ void play_game(char *player1, char *player2) {
         fclose(infile);
         sprintf(cmd, "%s < in.txt > out.txt", player2);
         system(cmd);
-        sleep(2);
+        sleep(1);
         sprintf(cmd, "pkill %s", player2);
         if (system(cmd) == 0) {
             printf("%s took too much time, so %s wins by default.\n",
