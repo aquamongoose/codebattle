@@ -63,7 +63,7 @@ void play_game(char *program) {
 
 int main(int argc, char **argv) {
     srand(time(NULL));
-    if (argc == 2) {
+    if (argc == 3) {
         small = 1;
         argc--;
     }
