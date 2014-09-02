@@ -39,11 +39,8 @@ void play_game(char *program) {
         fprintf(infile, "1\n");
         fprintf(infile, "%s\n", state);
         fclose(infile);
-        sprintf(cmd, "%s < in.txt > out.txt", program);
-        system(cmd);
-        sleep(1);
-        sprintf(cmd, "pkill %s", program);
-        if (system(cmd) == 0) {
+        sprintf(cmd, "timeout 1s %s < in.txt > out.txt", program);
+        if (system(cmd) != 0) {
             printf("%s took too much time, so Davey wins by default.\n",
                     program);
             return;
