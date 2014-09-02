@@ -18,6 +18,7 @@ void play_game(char *program) {
             printf("%d   ", i+1);
             if (i < 9) printf(" ");
         }
+        printf("-----------------------------------------------------------");
         printf("\n");
         for (int i=0; i<N; i++) {
             for (int j=0; j<N; j++) {
@@ -25,6 +26,7 @@ void play_game(char *program) {
             }
             printf("\n\n");
         }
+        printf("-----------------------------------------------------------");
         for (int i=0; i<N; i++) {
             printf("%d   ", i+1);
             if (i < 9) printf(" ");
