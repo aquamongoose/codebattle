@@ -32,14 +32,18 @@ void encode_state() {
     state[cur] = '\0';
 }
 
-void init_game() {
+void init_game(int size) {
     char *fname = (char *)malloc(MAX_FILE_SIZE);
     moves = 0;
     state = (char *)malloc(MAX_STATE_SIZE);
     sprintf(fname, "log.txt");
     logfile = fopen(fname, "w");
     free(fname);
-    N = rand()%(MAX_BOARD_SIZE-MIN_BOARD_SIZE + 1) + MIN_BOARD_SIZE;
+    if (size == -1) {
+        N = rand()%(MAX_BOARD_SIZE-MIN_BOARD_SIZE + 1) + MIN_BOARD_SIZE;
+    } else {
+        N = 7;
+    }
     for (int i=0; i<N; i++) {
         for (int j=0; j<N; j++) {
             board[i][j] = '.';

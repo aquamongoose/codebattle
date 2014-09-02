@@ -4,8 +4,10 @@
 #include <stdlib.h>
 #include "game.h"
 
+char small = 0;
+
 void play_game(char *program) {
-    init_game();
+    init_game(small ? 7 : -1);
     while (!winner()) {
         FILE *infile = fopen("in.txt", "w");
         char *cmd = (char *)malloc(MAX_CMD_SIZE);
@@ -61,6 +63,10 @@ void play_game(char *program) {
 
 int main(int argc, char **argv) {
     srand(time(NULL));
+    if (argc == 2) {
+        small = 1;
+        argc--;
+    }
     if (argc != 2) {
         printf("You must call %s with exactly one arguments, the path to the "
                "executable that should play Davey.\n", argv[0]);
