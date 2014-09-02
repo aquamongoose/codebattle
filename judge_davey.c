@@ -18,8 +18,8 @@ void play_game(char *program) {
             printf("%d   ", i+1);
             if (i < 9) printf(" ");
         }
-        printf("-----------------------------------------------------------");
         printf("\n");
+        printf("-----------------------------------------------------------");
         for (int i=0; i<N; i++) {
             for (int j=0; j<N; j++) {
                 printf("%c    ", board[i][j]);
