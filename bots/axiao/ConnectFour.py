@@ -150,4 +150,4 @@ for i in range(n):
 
 #board = [[".", ".", ".", ".", "."],[".", ".", "2", ".", "."],[".", ".", "1", ".", "."],[".", ".", "1", ".", "."],["2", "1", "1", "2", "."]]     
 node = Node(max_depth, 1, board, 1)
-print solve(node, max_depth, 1, my_piece, other_piece)[0]
+print solve(node, max_depth, 1, my_piece, other_piece)[0] + 1
