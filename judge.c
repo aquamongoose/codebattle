@@ -1,4 +1,5 @@
 #include <unistd.h>
+#include <time.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include "game.h"
