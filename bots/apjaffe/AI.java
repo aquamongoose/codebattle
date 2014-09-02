@@ -1,3 +1,4 @@
+import java.util.Arrays;
 public class AI 
 {
 	//private final int MAX_DEPTH = 1;
@@ -70,8 +71,9 @@ public class AI
 		int bestMove = -1;
 		double bestValue = -1;
 		int player = gs.nextPlayer();
-		for(int i=1;i<=cols;i++)
+		for(int m=1;m<=cols;m++)
 		{
+			int i=(m-1+cols/2)%cols+1;
 			GameState next = gs.makeMove(i);
 			if(next!=null)
 			{
@@ -99,6 +101,29 @@ public class AI
 		//return getRandomLegalMove(gs,player);
 	}
 	
+	class Move implements Comparable
+	{
+		double value;
+		int mv;
+		public int player;
+		public Move(int mv, double value, int player)
+		{
+			this.mv=mv;
+			this.value=value;
+			this.player=player;
+		}
+		public int compareTo(Object other)
+		{
+			double diff= this.value-((Move)other).value;
+			if(diff>0)
+				return 1*player;
+			else if(diff<0)
+				return -1*player;
+			else
+				return 0;
+		}
+	}
+	
 	//alpha is the highest score that p1 is guaranteed
 	//beta is the lowest score that p2 is guaranteed
 	public double evaluatePosition(GameState gs, double alpha, double beta, int maxDepth, long startTime) throws TimeoutException
@@ -112,10 +137,11 @@ public class AI
 			}
 			
 			int cols = gs.numCols();
-			int[] colChoices = new int[cols];
-			int k=0;
+			//Move[] colChoices = new Move[cols];
+			//int k=0;
 			
 			//should sort by whether they're promising
+			
 			
 			for(int i=1;i<=cols;i++)
 			{
@@ -127,8 +153,16 @@ public class AI
 					{
 						return ((double)nextWinner.intValue())-((10-maxDepth)*0.001*nextWinner.intValue());
 					}
+					/*else
+					{
+						colChoices[i-1]=new Move(i, next.evaluateBoard(), gs.nextPlayer());
+						k++;
+					}*/
 				}
 			}
+			
+			
+			//Arrays.sort(colChoices);
 			
 			/*for(int i=1;i<=cols;i++)
 			{
@@ -138,8 +172,10 @@ public class AI
 				}
 			}*/
 			
+			//for(int mv=0;mv<k;mv++)
 			for(int i=1;i<=cols;i++)
 			{
+				//int i=colChoices[mv].mv;
 				GameState next = gs.makeMove(i);
 				if(next!=null)
 				{
@@ -150,7 +186,7 @@ public class AI
 						alpha=Math.max(alpha,evaluatePosition(next, alpha, beta, maxDepth-1, startTime));
 						if(alpha>beta)
 						{
-							return 5;
+							return 1;
 						}
 					}
 					else
@@ -158,7 +194,7 @@ public class AI
 						beta=Math.min(beta,evaluatePosition(next, alpha, beta, maxDepth-1, startTime));
 						if(beta<alpha)
 						{
-							return -5;
+							return -1;
 						}
 					}
 				}

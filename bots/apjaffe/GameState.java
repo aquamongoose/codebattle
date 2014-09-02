@@ -138,21 +138,33 @@ public class GameState
 		count[0] = (a==0?1:0)+(b==0?1:0)+(c==0?1:0)+(d==0?1:0);
 		count[1] = (a==1?1:0)+(b==1?1:0)+(c==1?1:0)+(d==1?1:0);
 		count[2] = ((a==-1) ? 1:0)+((b== -1)?1:0)+((c== -1)?1:0)+((d== -1)?1:0);
+		
 		return count;
 	}
 	
 	private double evaluatePattern(int[] count)
 	{
+		double rtn=0;
+		
 		if(count[1]==3 && count[0]==1)
-			return 0.01;
+			rtn= 0.01;
 		else if(count[2]==3 && count[0]==1)
-			return -0.01;
+			rtn= -0.01;
 		else if(count[1]==2 && count[0]==2)
-			return 0.001;
+			rtn= 0.001;
 		else if(count[2]==2 && count[0]==2)
-			return -0.001;
+			rtn= -0.001;
 			
-		return 0;
+		if(count[1]>count[2] && nextPlayer==1)
+		{
+			rtn*=10;
+		}
+		if(count[2]>count[1] && nextPlayer==-1)
+		{
+			rtn*=10;
+		}
+		
+		return rtn;
 	}
 	
 	public double evaluateBoard()
@@ -200,6 +212,20 @@ public class GameState
 		            }
 				}
 				
+				if (j+5 <= cols) 
+	            {
+	                if (board[i][j+1] == board[i][j+2] &&
+	                    board[i][j+1] == board[i][j+3] &&
+	                    board[i][j+1] == board[i][j+4] &&
+	                    board[i][j+1] != 0 &&
+	                    boardVal(i,j) == 0 &&
+	                    boardVal(i,j+5) == 0 )
+	                 {
+	                 	System.out.println("!!!!!!");
+	                 	return board[i][j+1]*0.7;
+	                 }
+	            }
+				
 				if (i+4 <= rows) 
 				{
 					int[] counts = countEach(boardVal(i,j), boardVal(i+1,j), boardVal(i+2,j), boardVal(i+3,j));
@@ -232,7 +258,7 @@ public class GameState
 	{
 		if(board[i][j]!=0)
 			return board[i][j];
-		else if(j==0 || board[i][j-1]!=0)
+		else if(i==rows-1 || board[i+1][j]!=0)
 			return 0;
 		else
 			return -100;
