@@ -16,7 +16,7 @@ void play_game(char *player1, char *player2) {
             if (i < 9) printf(" ");
         }
         printf("\n");
-        printf("-----------------------------------------------------------");
+        printf("-----------------------------------------------------------\n");
         for (int i=0; i<N; i++) {
             for (int j=0; j<N; j++) {
                 printf("%c    ", board[i][j]);
@@ -50,7 +50,7 @@ void play_game(char *player1, char *player2) {
             if (i < 9) printf(" ");
         }
         printf("\n");
-        printf("-----------------------------------------------------------");
+        printf("-----------------------------------------------------------\n");
         for (int i=0; i<N; i++) {
             for (int j=0; j<N; j++) {
                 printf("%c    ", board[i][j]);

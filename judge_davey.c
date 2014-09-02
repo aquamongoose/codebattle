@@ -19,7 +19,7 @@ void play_game(char *program) {
             if (i < 9) printf(" ");
         }
         printf("\n");
-        printf("-----------------------------------------------------------");
+        printf("-----------------------------------------------------------\n");
         for (int i=0; i<N; i++) {
             for (int j=0; j<N; j++) {
                 printf("%c    ", board[i][j]);
