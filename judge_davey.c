@@ -13,18 +13,18 @@ void play_game(char *program) {
         FILE *dfile = fopen("out.txt", "w");
         printf("\n\n\n\n\n\n\n\n\n");
         for (int i=0; i<N; i++) {
-            printf("%d ", i+1);
+            printf("%d  ", i+1);
             if (i < 9) printf(" ");
         }
         printf("\n");
         for (int i=0; i<N; i++) {
             for (int j=0; j<N; j++) {
-                printf("%c  ", board[i][j]);
+                printf("%c   ", board[i][j]);
             }
             printf("\n\n");
         }
         for (int i=0; i<N; i++) {
-            printf("%d ", i+1);
+            printf("%d  ", i+1);
             if (i < 9) printf(" ");
         }
         printf("\n\n");
@@ -39,7 +39,7 @@ void play_game(char *program) {
         fprintf(infile, "1\n");
         fprintf(infile, "%s\n", state);
         fclose(infile);
-        sprintf(cmd, "timeout 1s %s < in.txt > out.txt", program);
+        sprintf(cmd, "timeout 2s %s < in.txt > out.txt", program);
         if (system(cmd) != 0) {
             printf("%s took too much time, so Davey wins by default.\n",
                     program);

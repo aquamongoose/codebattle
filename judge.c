@@ -11,7 +11,7 @@ void play_game(char *player1, char *player2) {
         fprintf(infile, "1\n");
         fprintf(infile, "%s\n", state);
         fclose(infile);
-        sprintf(cmd, "timeout 1s %s < in.txt > out.txt", player1);
+        sprintf(cmd, "timeout 2s %s < in.txt > out.txt", player1);
         if (system(cmd) != 0) {
             printf("%s took too much time, so %s wins by default.\n",
                     player1, player2);
@@ -26,7 +26,7 @@ void play_game(char *player1, char *player2) {
         fprintf(infile, "2\n");
         fprintf(infile, "%s\n", state);
         fclose(infile);
-        sprintf(cmd, "timeout 1s %s < in.txt > out.txt", player2);
+        sprintf(cmd, "timeout 2s %s < in.txt > out.txt", player2);
         if (system(cmd) != 0) {
             printf("%s took too much time, so %s wins by default.\n",
                     player2, player1);
