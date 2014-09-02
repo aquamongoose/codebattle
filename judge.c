@@ -5,7 +5,7 @@
 #include "game.h"
 
 void play_game(char *player1, char *player2) {
-    init_game();
+    init_game(-1);
     while (!winner()) {
         FILE *infile = fopen("in.txt", "w");
         char *cmd = (char *)malloc(MAX_CMD_SIZE);

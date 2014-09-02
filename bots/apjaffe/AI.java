@@ -1,7 +1,7 @@
 public class AI 
 {
 	//private final int MAX_DEPTH = 1;
-	private final int TIMEOUT = 900;
+	private final int TIMEOUT = 4000;
 	private final boolean DEBUG = false;
 	
 	public AI()
@@ -82,7 +82,7 @@ public class AI
 					bestMove = i;
 				}
 				
-				if(DEBUG && maxDepth>=5)
+				if(DEBUG && maxDepth>=1)
 				{
 					System.out.println(maxDepth+"::"+i+":"+bestValue);
 				}
@@ -116,6 +116,7 @@ public class AI
 			int k=0;
 			
 			//should sort by whether they're promising
+			
 			for(int i=1;i<=cols;i++)
 			{
 				GameState next = gs.makeMove(i);
@@ -128,6 +129,14 @@ public class AI
 					}
 				}
 			}
+			
+			/*for(int i=1;i<=cols;i++)
+			{
+				if(i<cols/2)
+				{
+					colChoices[
+				}
+			}*/
 			
 			for(int i=1;i<=cols;i++)
 			{
@@ -180,19 +189,18 @@ public class AI
 		
 		Integer winner = gs.winner();
 		if(winner==null)
-			return 0;
+		{
+			/*int NUM_RND=2;
+			double sum = 0;
+			for(int i=0;i<NUM_RND;i++)
+			{
+				sum+=finishGameRandomly(gs);
+			}
+			return sum/NUM_RND1*0.5;*/
+			return gs.evaluateBoard();
+		}
 		else
 			return ((double)winner.intValue())-((10-maxDepth)*0.001*winner.intValue());
-		
-		/*
-		int NUM_RND=2;
-		double sum = 0;
-		for(int i=0;i<NUM_RND;i++)
-		{
-			sum+=finishGameRandomly(gs);
-		}
-		return sum/NUM_RND;
-		*/
 	}
 	
 	public int finishGameRandomly(GameState gs)

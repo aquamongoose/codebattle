@@ -68,7 +68,7 @@ public class Connect4 {
 	public static void PvAI()
 	{
 		AI ai = new AI();
-		GameState gs = new GameState(10,10);
+		GameState gs = new GameState(16,16);
 		int nextPlayer = 1;
 		Integer winner = null;
 		while(winner==null)
