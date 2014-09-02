@@ -60,7 +60,7 @@ void finalize_game() {
 char winner() {
     char tie = 1;
     for (int i=0; i<N; i++) {
-        if (board[i][0] == '.') {
+        if (board[0][i] == '.') {
             tie = 0;
         }
     }
