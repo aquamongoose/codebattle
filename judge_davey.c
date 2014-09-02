@@ -57,7 +57,7 @@ void play_game(char *program) {
     if (winner() == 'T') {
         printf("The winner is... nobody. The game was a tie. Everyone loses.\n");
     } else {
-        printf("The winner is %s!\n", winner() == '1' ? program : "Davey");
+        printf("The winner is %s!\n", winner() == '1' ? "Davey" : program);
     }
     finalize_game();
 }
