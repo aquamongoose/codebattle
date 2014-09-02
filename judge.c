@@ -9,6 +9,25 @@ void play_game(char *player1, char *player2) {
     while (!winner()) {
         FILE *infile = fopen("in.txt", "w");
         char *cmd = (char *)malloc(MAX_CMD_SIZE);
+        char *wat = malloc(12);
+        printf("\n\n\n\n\n\n\n\n\n");
+        for (int i=0; i<N; i++) {
+            printf("%d   ", i+1);
+            if (i < 9) printf(" ");
+        }
+        printf("\n");
+        for (int i=0; i<N; i++) {
+            for (int j=0; j<N; j++) {
+                printf("%c    ", board[i][j]);
+            }
+            printf("\n\n");
+        }
+        for (int i=0; i<N; i++) {
+            printf("%d   ", i+1);
+            if (i < 9) printf(" ");
+        }
+        scanf("%s", &wat);
+        printf("\n\n");
         fprintf(infile, "1\n");
         fprintf(infile, "%s\n", state);
         fclose(infile);
@@ -23,6 +42,23 @@ void play_game(char *player1, char *player2) {
                     player1, player2);
             return;
         }
+        printf("\n\n\n\n\n\n\n\n\n");
+        for (int i=0; i<N; i++) {
+            printf("%d   ", i+1);
+            if (i < 9) printf(" ");
+        }
+        printf("\n");
+        for (int i=0; i<N; i++) {
+            for (int j=0; j<N; j++) {
+                printf("%c    ", board[i][j]);
+            }
+            printf("\n\n");
+        }
+        for (int i=0; i<N; i++) {
+            printf("%d   ", i+1);
+            if (i < 9) printf(" ");
+        }
+        scanf("%s", &wat);
         infile = fopen("in.txt", "w");
         fprintf(infile, "2\n");
         fprintf(infile, "%s\n", state);
