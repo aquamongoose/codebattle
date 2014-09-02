@@ -60,6 +60,7 @@ void play_game(char *program) {
 }
 
 int main(int argc, char **argv) {
+    srand(time(NULL));
     if (argc != 2) {
         printf("You must call %s with exactly one arguments, the path to the "
                "executable that should play Davey.\n", argv[0]);

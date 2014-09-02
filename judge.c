@@ -48,6 +48,7 @@ void play_game(char *player1, char *player2) {
 }
 
 int main(int argc, char **argv) {
+    srand(time(NULL));
     if (argc != 3) {
         printf("You must call %s with exactly two arguments, the paths to the "
                 "two executables that should play eachother.\n", argv[0]);
