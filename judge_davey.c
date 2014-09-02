@@ -38,7 +38,8 @@ void play_game(char *program) {
                     program);
             return;
         }
-        fprintf(infile, "1\n");
+        if (winner()) break;
+        fprintf(infile, "2\n");
         fprintf(infile, "%s\n", state);
         fclose(infile);
         sprintf(cmd, "timeout 10s %s < in.txt > out.txt", program);

@@ -59,6 +59,7 @@ void play_game(char *player1, char *player2) {
             if (i < 9) printf(" ");
         }
         scanf("%s", &wat);
+        if (winner()) break;
         infile = fopen("in.txt", "w");
         fprintf(infile, "2\n");
         fprintf(infile, "%s\n", state);
