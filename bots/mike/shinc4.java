@@ -5,9 +5,10 @@ import java.util.*;
   *
 */
 public class shinc4 {
-  public static int SEARCH_DEPTH = 2;
+  public static int SEARCH_DEPTH = 4;
   public static int NO_CON = 10000;
   public static int ABS_CON = 10001;
+  public static int VERY_BAD = 10002;
   public static double C4_VAL = 100;
   public static double C3_VAL = 1;
   public static double C2_VAL = 0.1;
@@ -101,7 +102,7 @@ public class shinc4 {
       } else {
         scores[k] = eval(simMove(board, k, turn), turn, SEARCH_DEPTH - 1);
         if (scores[k] == -2) {
-          scores[k] = NO_CON;
+          scores[k] = VERY_BAD;
         }
         if (scores[k] == -4) {
           if (DEBUG) {
@@ -117,7 +118,7 @@ public class shinc4 {
     }
     int maxIndex = -1;
     for (int k = 0; k < scores.length; k++) {
-      if (scores[k] != NO_CON) {
+      if (scores[k] != NO_CON && scores[k] != VERY_BAD) {
         maxIndex = k;
         break;
       }
@@ -128,7 +129,11 @@ public class shinc4 {
       }
     }
     if (maxIndex == -1) {
-      return (int)(Math.random() * board.length);
+      for(int k = 0; k < scores.length; k++){
+        if(scores[k] != NO_CON){
+          return k;
+        }
+      }
     }
     ArrayList<Integer> maxes = new ArrayList<Integer>();
     for (int k = 0; k < scores.length; k++) {
@@ -193,15 +198,16 @@ public class shinc4 {
 
     // printMatrix(board);
     // System.out.println(is4);
+    if (is4 > 0 && turn == myturn) {
+      // System.out.println("Negg");
+      return -4;
+    }
 
     if (is4 > 0 && turn != myturn) {
       // System.out.println("Neg");
       return -3;
     }
-    if (is4 > 0 && turn == myturn) {
-      // System.out.println("Negg");
-      return -4;
-    }
+
     if (depth == 0) {
       double mscore = pureEval(board, myturn);
       double hscore = -1 * pureEval(board, 3 - myturn);
@@ -215,7 +221,7 @@ public class shinc4 {
         scores[i] = NO_CON;
       } else {
         moveCount ++;
-        scores[i] = eval(simMove(board, i, 3-turn), 3 - turn, depth - 1);
+        scores[i] = eval(simMove(board, i, 3 - turn), 3 - turn, depth - 1);
       }
     }
     if (turn == myturn) {
@@ -245,11 +251,11 @@ public class shinc4 {
         * Here, I could just remove from consideration all -2 results but I think this is a bad idea for now.
         * Definitely subject to change.
       */
-      // for (int i = 0; i < scores.length; i++) {
-      //   if (scores[i] == -2) {
-      //     scores[i] = NO_CON;
-      //   }
-      // }
+      for (int i = 0; i < scores.length; i++) {
+        if (scores[i] == -2) {
+          scores[i] = -1 * C4_VAL;
+        }
+      }
       for (int i = 0; i < scores.length; i++) {
         if (scores[i] != NO_CON) {
           sum += scores[i];
