@@ -11,7 +11,6 @@ void play_game(char *player1, char *player2) {
     while (!winner()) {
         FILE *infile = fopen("in.txt", "w");
         char *cmd = (char *)malloc(MAX_CMD_SIZE);
-        char *wat = malloc(12);
         printf("\n\n\n\n\n\n\n\n\n");
         for (int i=0; i<N; i++) {
             printf("%d   ", i+1);
@@ -30,7 +29,7 @@ void play_game(char *player1, char *player2) {
             printf("%d   ", i+1);
             if (i < 9) printf(" ");
         }
-        scanf("%s", wat);
+        getchar();
         printf("\n\n");
         fprintf(infile, "1\n");
         fprintf(infile, "%s\n", state);
@@ -64,7 +63,7 @@ void play_game(char *player1, char *player2) {
             printf("%d   ", i+1);
             if (i < 9) printf(" ");
         }
-        scanf("%s", wat);
+        getchar();
         if (winner()) break;
         infile = fopen("in.txt", "w");
         fprintf(infile, "2\n");
