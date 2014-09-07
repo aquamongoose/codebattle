@@ -42,7 +42,7 @@ void init_game(int size) {
     if (size == -1) {
         N = rand()%(MAX_BOARD_SIZE-MIN_BOARD_SIZE + 1) + MIN_BOARD_SIZE;
     } else {
-        N = 7;
+        N = size;
     }
     for (int i=0; i<N; i++) {
         for (int j=0; j<N; j++) {

@@ -4,10 +4,10 @@
 #include <stdlib.h>
 #include "game.h"
 
-char small;
+int size = -1;
 
 void play_game(char *player1, char *player2) {
-    init_game(small ? 7 : -1);
+    init_game(size);
     while (!winner()) {
         FILE *infile = fopen("in.txt", "w");
         char *cmd = (char *)malloc(MAX_CMD_SIZE);
@@ -94,8 +94,7 @@ void play_game(char *player1, char *player2) {
 int main(int argc, char **argv) {
     srand(time(NULL));
     if (argc == 4) {
-        small = 1;
-        argc--;
+        size = atoi(argv[--argc]);
     }
     if (argc != 3) {
         printf("You must call %s with exactly two arguments, the paths to the "
