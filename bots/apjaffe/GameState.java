@@ -134,10 +134,11 @@ public class GameState
 	
 	private int[] countEach(int a,int b,int c,int d)
 	{
-		int[] count = new int[3];
+		int[] count = new int[4];
 		count[0] = (a==0?1:0)+(b==0?1:0)+(c==0?1:0)+(d==0?1:0);
 		count[1] = (a==1?1:0)+(b==1?1:0)+(c==1?1:0)+(d==1?1:0);
 		count[2] = ((a==-1) ? 1:0)+((b== -1)?1:0)+((c== -1)?1:0)+((d== -1)?1:0);
+		count[3] = ((a==-100) ? 1:0)+((b== -100)?1:0)+((c== -100)?1:0)+((d== -100)?1:0);
 		
 		return count;
 	}
@@ -150,10 +151,19 @@ public class GameState
 			rtn= 0.01;
 		else if(count[2]==3 && count[0]==1)
 			rtn= -0.01;
+		else if(count[1]==3 && count[3]==1)
+			rtn= 0.001;
+		else if(count[2]==3 && count[3]==1)
+			rtn= -0.001;
 		else if(count[1]==2 && count[0]==2)
 			rtn= 0.001;
 		else if(count[2]==2 && count[0]==2)
 			rtn= -0.001;
+		else if(count[1]==2 && count[3]==2)
+			rtn= 0.0001;
+		else if(count[2]==2 && count[3]==2)
+			rtn= -0.0001;
+	
 			
 		if(count[1]>count[2] && nextPlayer==1)
 		{
@@ -216,12 +226,10 @@ public class GameState
 	            {
 	                if (board[i][j+1] == board[i][j+2] &&
 	                    board[i][j+1] == board[i][j+3] &&
-	                    board[i][j+1] == board[i][j+4] &&
 	                    board[i][j+1] != 0 &&
 	                    boardVal(i,j) == 0 &&
-	                    boardVal(i,j+5) == 0 )
+	                    boardVal(i,j+4) == 0 )
 	                 {
-	                 	System.out.println("!!!!!!");
 	                 	return board[i][j+1]*0.7;
 	                 }
 	            }
@@ -271,17 +279,21 @@ public class GameState
 		for(int i=0;i<rows;i++)
 		{
 			for(int j=0;j<cols;j++)
-				str.append(playerName(board[i][j]));
-			str.append("\n");
+				str.append(playerName(board[i][j])+" ");
+			str.append("\n\n");
 		}
 		return str.toString();		
 	}
 	
-	private int playerName(int orig)
+	private char playerName(int orig)
 	{
 		if(orig==-1)
-			return 2;
+			return '2';
+		else if(orig==0)
+			return '_';
+		else if(orig==1)
+			return '1';
 		else
-			return orig;
+			return (""+orig).charAt(0);
 	}
 }

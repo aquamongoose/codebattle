@@ -68,7 +68,9 @@ public class Connect4 {
 	public static void PvAI()
 	{
 		AI ai = new AI();
-		GameState gs = new GameState(20,20);
+		int NUM_ROWS=6;
+		int NUM_COLS=7;
+		GameState gs = new GameState(NUM_ROWS,NUM_COLS);
 		int nextPlayer = 1;
 		Integer winner = null;
 		while(winner==null)
@@ -81,7 +83,7 @@ public class Connect4 {
 			
 				do
 				{
-					System.out.println("Player " + nextPlayer+": ");
+					System.out.println("Human, enter column number (1-" + NUM_COLS+"): ");
 					int move = scanner.nextInt();
 					next = gs.makeMove(move);
 				}
@@ -98,6 +100,11 @@ public class Connect4 {
 		}
 		
 		System.out.println(gs.toString());
-		System.out.println("Game over: Result is " + winner);
+		if(winner==1)
+			System.out.println("Game over. First player wins.");
+		else if(winner==-1)
+			System.out.println("Game over. Second player wins.");
+		else
+			System.out.println("Game over. Draw.");
 	}
 }
